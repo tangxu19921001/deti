@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+        >
+    <RelativeLayout
+            android:layout_width="fill_parent" android:layout_height="55dp">
+        <ImageView
+                android:id="@+id/home_back"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@drawable/icon_home_back"
+                android:gravity="center"
+
+               />
+        <TextView
+                android:id="@+id/home_title"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="标题"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:textColor="@color/text_gray"
+                android:textSize="20sp"/>
+        <LinearLayout
+                android:id="@+id/home_sex_choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+
+                >
+            <TextView
+                    android:id="@+id/women"
+                    android:layout_width="wrap_content"
+                    android:text="WOMEN"
+                    android:textSize="20sp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/man"
+                    android:layout_width="wrap_content"
+                    android:text="MAN"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <ImageView
+                android:id="@+id/home_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="gone"
+                android:padding="3dp"
+                android:layout_marginRight="8dp"
+                android:layout_alignParentRight="true"
+               android:background="@drawable/user_tab_btn"
+                />
+    </RelativeLayout>
+
+</LinearLayout>

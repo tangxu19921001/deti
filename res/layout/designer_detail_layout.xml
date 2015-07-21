@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res/com.example.deti"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/black_title_layout"></include>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        <Button
+                android:id="@+id/get_designer"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/deti_text_bg"
+                android:textSize="11sp"
+                android:text="@string/get_designer"/>
+
+        <com.example.deti.widge.CircleImageView
+                android:id="@+id/detail_designer_avatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+
+                app:border_width="2dp"
+                app:border_color="@color/black"
+                />
+
+        <Button
+
+                android:id="@+id/follow"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="11sp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/deti_text_bg"
+                android:text="@string/cancel_follow"/>
+    </RelativeLayout>
+
+    <TextView
+            android:id="@+id/detail_realName"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="xx"/>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_designer_avatar"/>
+
+        <TextView
+                android:id="@+id/detail_favorite_number"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:textSize="10sp"
+                android:layout_marginRight="30dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+
+                />
+
+        <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/designer_dizhi"
+
+                />
+
+        <TextView
+                android:id="@+id/detail_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="中国"/>
+
+        <TextView
+                android:id="@+id/detail_city"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上海"/>
+
+
+    </LinearLayout>
+
+    <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:id="@+id/detail_designer_description"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_text_bg"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+            />
+<GridView
+        android:id="@+id/grid_list_style"
+        android:layout_width="fill_parent"
+        android:background="@color/white"
+        android:numColumns="2"
+        android:layout_height="fill_parent">
+
+</GridView>
+</LinearLayout>

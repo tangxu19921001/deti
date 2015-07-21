@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="label_array">
+        <item>送外卖</item>
+        <item>取快递</item>
+        <item>办卡</item>
+        <item>代课</item>
+        <item>划重点</item>
+        <item>助复习</item>
+        <item>考研英语</item>
+        <item>陪打架</item>
+        <item>陪健身</item>
+        <item>陪聊</item>
+        <item>洗衣服</item>
+        <item>晒被子</item>
+        <item>借宿</item>
+        <item>团购吃饭</item>
+        <item>买饭做菜</item>
+        <item>教跆拳道</item>
+        <item>教唱歌</item>
+        <item>教滑冰</item>
+        <item>义务助学</item>
+        <item>山区助学</item>
+        <item>请家教</item>
+        <item>练吉他</item>
+        <item>借教室</item>
+        <item>借参考书</item>
+        <item>二手市场</item>
+    </string-array>
+</resources>

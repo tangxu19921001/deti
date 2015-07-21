@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <EditText
+            android:id="@+id/evaluateText"
+            android:layout_width="match_parent"
+            android:hint="在此输入你的评价，提交表示你已认同任务完成"
+            android:layout_height="200dp"/>
+    <TextView
+            android:id="@+id/submit"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@color/green"
+            android:text="提交评价"
+            android:gravity="center"
+            android:textColor="@color/golden"/>
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/news_bg">
+    <TextView
+            android:id="@+id/title_new_msg"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="@string/news_msg"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="15sp"
+            android:text="@string/news_msg_time"/>
+    <TextView
+            android:layout_below="@+id/title_new_msg"
+            android:id="@+id/content"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"/>
+</RelativeLayout>
