@@ -1,9 +1,12 @@
 package com.example.deti.util;
 
 import android.content.Context;
+import com.example.deti.io.Setting;
 import com.example.deti.main.DumpMessage;
 
+import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * create time 2015/1/15
@@ -15,6 +18,8 @@ public class HttpTask extends AbstractTask {
     private HashMap<String,String> paramHashMap;
     private Context context;
     private int msgType;
+
+    private Map<String,Object>objectMap;
 
     /***
      * @param urlString  post�����ַ
@@ -28,13 +33,24 @@ public class HttpTask extends AbstractTask {
         this.paramHashMap = paramHashMap;
     }
 
+    public HttpTask(String urlString,int msgType,Context context,Map<String,Object >objectMap){
+        this.urlString = urlString;
+        this.context = context;
+        this.msgType = msgType;
+        this.objectMap = objectMap;
+    }
 
 
     @Override
     public void doInBackground() {
         String returnJson = null;
         try {
-            returnJson = HttpRequestUtils.httpPost(urlString, paramHashMap, true);
+            if (objectMap==null){
+                returnJson = HttpRequestUtils.httpPost(urlString, paramHashMap, true);
+            }else {
+                returnJson = HttpRequestUtils.testPost(urlString, objectMap);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

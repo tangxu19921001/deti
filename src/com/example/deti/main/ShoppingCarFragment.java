@@ -15,7 +15,7 @@ import com.example.deti.util.AppMessage;
  * Created by Administrator on 2015/7/14.
  */
 public class ShoppingCarFragment extends Fragment implements IMsgBack {
-    private static final String Tag = UserFragment.class.getSimpleName();
+    private static final String Tag = ShoppingCarFragment.class.getSimpleName();
     private String msgKey;
     private String userPhone;
     @Override

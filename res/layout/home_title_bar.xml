@@ -11,7 +11,8 @@
         <ImageView
                 android:id="@+id/home_back"
                 android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
+                android:paddingLeft="10dp"
                 android:layout_height="fill_parent"
                 android:background="@drawable/icon_home_back"
                 android:gravity="center"
@@ -57,9 +58,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:visibility="gone"
-                android:padding="3dp"
-                android:layout_marginRight="8dp"
+
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:layout_marginRight="15dp"
                 android:layout_alignParentRight="true"
                android:background="@drawable/user_tab_btn"
                 />

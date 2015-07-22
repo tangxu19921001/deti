@@ -19,6 +19,11 @@ public class Global {
     public static final String CANCEL_FOLLOW_DESIGNER_URL = SERVICE_URL +"/client/user/removeFavorite";
     public static final String GET_DESIGN_LIST_URL = SERVICE_URL + "/client/design/getDesignList";
     public static final String GET_SINGLE_DESIGN_INGO_URL = SERVICE_URL +"/client/design/getDesignInfo";
+    public static final String GET_VERIFY_URL =SERVICE_URL +"/client/customer/getVerificationcode";
+    public static final String VERIFY_CODE_URL = SERVICE_URL + "/client/customer/validateVerificationcode";
+    public static final String USER_FROGET_PASSWORD = SERVICE_URL + "/client/customer/forgetPassword";
+    public static final String REGISTER_FINISH_URL = SERVICE_URL + "/client/customer/regist";
+    public static final String AVATAR_POST_URL = SERVICE_URL +"/client/customer/setCustomerAvatar";
     //极光推送参数(必填)
     public static String SENDNO = "sendno";
     public static String APP_KEY = "app_key";
@@ -53,6 +58,20 @@ public class Global {
     public final static int MSG_GET_DESIGNER_LIST = 9;
     public final static int MSG_GET_DESIGN_INFO = 10;
     //得到未完成的任务列表
+    //得到验证码
+    public final static int MSG_GET_VERIFY = 11;
+    //验证验证码
+    public final static int MSG_VERIFY_CODE = 12;
+    //用户忘记密码
+    public final static int MSG_USER_FORGET_PASSWORD = 13;
+    //注册用户验证验证码
+    public final static int MSG_REGISTER_VERIFY_CODE = 14;
+    //注册最后提交
+    public final static int MSG_REGISTER_SUBMIT = 15;
+    //注册用户得到验证码
+    public final static int MSG_REGISTER_GET_VERIFY_CODE = 16;
+    //用户保存头像
+    public final static int MSG_ADD_AVATAR_USER = 17;
     public final static int MSG_GET_TASK_LIST = 1113;
 
     //返回当前用户任务

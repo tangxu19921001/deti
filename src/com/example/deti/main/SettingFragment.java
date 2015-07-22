@@ -33,7 +33,7 @@ import java.util.HashMap;
  * Created by Administrator on 2015/7/16.
  */
 public class SettingFragment extends Fragment implements IMsgBack {
-    private static final String Tag = UserFragment.class.getSimpleName();
+    private static final String Tag = SettingFragment.class.getSimpleName();
     private String msgKey;
     private String userPhone;
     private CircleImageView avatar;
@@ -65,19 +65,23 @@ public class SettingFragment extends Fragment implements IMsgBack {
     @Override
     public void onResume() {
         super.onResume();
-        if (hashMap == null) {
-            hashMap = new HashMap<String, String>();
-        }
-        hashMap.put("cellphone", Setting.getInstance().getUserPhone());
-        if (Setting.getInstance().isChangedAvatar()||Setting.getInstance().getAvatar()==null){
+       if (Setting.getInstance().getUserPhone()!=null&&!Setting.getInstance().getUserPhone().equals("")){
+           if (hashMap == null) {
+               hashMap = new HashMap<String, String>();
+           }
+           hashMap.put("cellphone", Setting.getInstance().getUserPhone());
+           //TODO测试
+//           if (Setting.getInstance().isChangedAvatar()||Setting.getInstance().getAvatar()==null){
 
-            taskThread.addTask(new HttpTask(Global.GET_USER_IMFORMATION, Global.MSG_GET_USER_IMFORMATION, context, hashMap));
-        }else {
-            Message successMsg = handler.obtainMessage();
-            successMsg.what = Global.MSG_GET_USER_IMFORMATION;
-            successMsg.obj = Setting.getInstance().getAvatar();
-            handler.sendMessage(successMsg);
-        }
+               taskThread.addTask(new HttpTask(Global.GET_USER_IMFORMATION, Global.MSG_GET_USER_IMFORMATION, context, hashMap));
+//           }else {
+//               Message successMsg = handler.obtainMessage();
+//               successMsg.what = Global.MSG_GET_USER_IMFORMATION;
+//               successMsg.obj = Setting.getInstance().getAvatar();
+//               handler.sendMessage(successMsg);
+//           }
+       }
+
 
 
     }
@@ -146,6 +150,7 @@ public class SettingFragment extends Fragment implements IMsgBack {
                     case Global.MSG_REQUEST_WRONG:
 
                         Toast.makeText(context, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                        break;
 
                 }
             }
@@ -162,7 +167,7 @@ public class SettingFragment extends Fragment implements IMsgBack {
             JsonParse jsonParse = new JsonParse();
             Person person1 = jsonParse.getPerson(appMessage.getMsg(), Person.class);
             if (person1.getResult() == true) {
-                Setting.getInstance().setAvatar(Global.SERVICE_URL+person1.getAvatar());
+                Setting.getInstance().setAvatar(Global.SERVICE_URL + person1.getAvatar());
                 successMsg.what = Global.MSG_GET_USER_IMFORMATION;
                 successMsg.obj =Global.SERVICE_URL+ person1.getAvatar();
                 handler.sendMessage(successMsg);

@@ -106,7 +106,7 @@ public class TaskDetailActivity extends Activity implements IMsgBack {
                                 Log.i(Tag, "should retry later-->" + e);
                             } catch (APIRequestException e) {
 
-                                Log.e("Should review the error, and fix the request", "" + e);
+                                //Log.e("Should review the error, and fix the request", "" + e);
                                 Log.i(Tag, "HTTP Status: " + e.getStatus());
                                 Log.i(Tag, "Error Code: " + e.getErrorCode());
                                 Log.i(Tag, "Error Message: " + e.getErrorMessage());

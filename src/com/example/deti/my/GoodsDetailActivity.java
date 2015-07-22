@@ -56,28 +56,28 @@ public class GoodsDetailActivity extends Activity implements IMsgBack {
         hashMap.put("designId", defaultDesign.getId() + "");
         taskThread.addTask(new HttpTask(Global.GET_SINGLE_DESIGN_INGO_URL, Global.MSG_GET_DESIGN_INFO, GoodsDetailActivity.this, hashMap));
     }
-}
-    private void initHandler(){
-        handler = new Handler() {
-            @Override
-            public void dispatchMessage(Message msg) {
-                switch (msg.what) {
-                    case Global.MSG_GET_DESIGN_INFO:
-                        Custom custom
-                        if (msg.obj!=null) {
-                             custom = (Custom) msg.obj;
-                            titleText.setText(custom.getName());
-                        }
-                        Toast.makeText(GoodsDetailActivity.this, R.string.cancel_follow_success, Toast.LENGTH_LONG).show();
-                        isFollowed = false;
-                        break;
 
-                    case Global.MSG_REQUEST_WRONG:
-                        Toast.makeText(GoodsDetailActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
-                        break;
-                }
-            }
-        };
+    private void initHandler(){
+//        handler = new Handler() {
+//            @Override
+//            public void dispatchMessage(Message msg) {
+//                switch (msg.what) {
+//                    case Global.MSG_GET_DESIGN_INFO:
+//                        Custom custom
+//                        if (msg.obj!=null) {
+//                             custom = (Custom) msg.obj;
+//                            titleText.setText(custom.getName());
+//                        }
+//                        Toast.makeText(GoodsDetailActivity.this, R.string.cancel_follow_success, Toast.LENGTH_LONG).show();
+//                        isFollowed = false;
+//                        break;
+//
+//                    case Global.MSG_REQUEST_WRONG:
+//                        Toast.makeText(GoodsDetailActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+//                        break;
+//                }
+//            }
+//        };
     }
     @Override
     public void onDestroy(){
@@ -115,4 +115,5 @@ public class GoodsDetailActivity extends Activity implements IMsgBack {
                 }
                 break;
     }
+}
 }

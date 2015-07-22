@@ -8,6 +8,7 @@
     <string name="input_phone_number">输入手机号码</string>
     <string name="input_password">输入密码</string>
     <string name="look_for_password">找回密码</string>
+    <string name="register_phone">手机号注册</string>
     <!--用户详情页-->
     <string name="style_like">喜欢的款式</string>
     <string name="designer_like">喜欢的设计师</string>
@@ -25,6 +26,27 @@
     <string name="cancel_follow">取消关注</string>
     <string name="cancel_follow_success">取消关注成功</string>
     <string name="follow_success">关注成功</string>
+    <string name="get_verify">获取验证码</string>
+    <string name="input_verify">输入验证码</string>
+    <string name="set_password">设置密码 (8-32位非空字符)</string>
+    <string name="input_password_again">再次输入新密码</string>
+    <string name="finish">完成</string>
+    <string name="verify_code_already">验证码短信已经发送，请查收</string>
+    <string name="no_empty_or_no_phone">手机号不能为空或手机号无效</string>
+    <string name="verifycation_code_no_empty">验证码不能为空</string>
+    <string name="password_not_same">两次密码不一致</string>
+    <string name="password_no_empty">密码不能为空</string>
+    <string name="update_password_success">修改密码成功</string>
+    <string name="register_success">注册成功</string>
+    <string name="my_setting">我的设置</string>
+    <string name="avatar_setting_text">头像</string>
+<!-- 我的设置页面-->
+    <string name="my_address">我的地址</string>
+    <string name="my_size">我的尺码</string>
+    <string name="update_password">修改密码</string>
+    <string name="about_deti">关于得体</string>
+    <string name="login_out">退出登录</string>
+    <string name="keep_success">保存成功</string>
     <!--以前程序的注释-->
     <string name="app_name">得体</string>
     <string name="user_name">账户名:</string>
@@ -36,7 +58,7 @@
     <string name="register">注册</string>
     <string name="login">登录</string>
     <string name="no_money">你的资金不足</string>
-    <string name="login_out">退出登录</string>
+
     <string name="back">返回</string>
     <string name="next">下一步</string>
     <string name="phone_number">手机号</string>
@@ -44,12 +66,12 @@
     <string name="phone_prefix">+86</string>
     <string name="register_title">新玩家注册</string>
     <string name="no_empty">账号密码不能为空</string>
-    <string name="count_rule_tip_msg">手机号长度不小于3位，不大于16位</string>
+    <string name="count_rule_tip_msg">密码长度不小于8位，不大于32位</string>
     <string name="password_rule_tip_msg">密码长度不小于6位，不大于16位</string>
     <string name="character_rule_tip_msg">账号包含不允许的字符</string>
-    <string name="register_success">注册成功</string>
+
     <string name="password_tip_no_all_number">密码不能为纯数字</string>
-    <string name="no_space">账号和密码不能有空格</string>
+    <string name="no_space">密码不能有空格</string>
     <string name="wrong_count_password">用户名或密码错误</string>
     <string name="login_success">登陆成功</string>
     <string name="user_exist">用户名已存在</string>

@@ -24,10 +24,13 @@
         <activity android:name=".myTask.TaskDetailActivity"></activity>
         <activity android:name=".myTask.EvaluateActivity"></activity>
         <activity android:name=".main.LoginActivity"
-                  android:launchMode="singleInstance"></activity>
+                  ></activity>
         <activity android:name=".my.CollectionActivity"></activity>
         <activity android:name=".my.DesignerLikeActivity"></activity>
         <activity android:name=".my.DesignerDetailActivity"></activity>
+        <activity android:name=".my.BackForPasswordActivity"></activity>
+        <activity android:name=".my.RegisterActivity"></activity>
+        <activity android:name=".main.MySettingActivity"></activity>
         <!-- Required -->
         <service
                 android:name="cn.jpush.android.service.PushService"
@@ -38,6 +41,7 @@
                 <action android:name="cn.jpush.android.intent.REPORT" />
                 <action android:name="cn.jpush.android.intent.PushService" />
                 <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+
             </intent-filter>
         </service>
 
@@ -119,7 +123,9 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS" /> <!--since 1.6.0 -->
     <uses-permission  android:name="android.permission.CALL_PHONE" />
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- Optional. Required for location feature -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />

@@ -13,6 +13,17 @@ public class Person {
     private String birthday;
     private String avatar;
     private DesignerList designList;
+    private String path;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+
 
 
 

@@ -8,11 +8,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.example.deti.R;
 import com.example.deti.entity.Person;
 import com.example.deti.io.Setting;
+import com.example.deti.my.BackForPasswordActivity;
+import com.example.deti.my.RegisterActivity;
 import com.example.deti.myTask.TaskDetailActivity;
 import com.example.deti.parse.JsonParse;
 import com.example.deti.user.IMsgBack;
@@ -34,6 +37,7 @@ public class LoginActivity extends Activity implements IMsgBack{
     private EditText userNameEdit;
     private EditText passwordEdit;
     private int fromTab;
+    private TextView looBackPasswordText;
 
 
     private TaskThread taskThread = new TaskThread();
@@ -69,28 +73,37 @@ public class LoginActivity extends Activity implements IMsgBack{
         TextView loginText = (TextView) findViewById(R.id.login_text);
         TextView registerText = (TextView) findViewById(R.id.register_text);
         TextView lookForPassword = (TextView) findViewById(R.id.look_for_password);
+        ImageView backText = (ImageView) findViewById(R.id.login_back);
+        registerText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Util.startActivityAnim(LoginActivity.this, RegisterActivity.class);
+            }
+        });
 
-//        loginOut.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                loginOut();
-//            }
-//        });
-        //暂时TODO
-        loginText.setOnClickListener(new View.OnClickListener() {
+        backText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        lookForPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Util.startActivityAnim(LoginActivity.this, BackForPasswordActivity.class);
+            }
+        });
+
+
+        loginText.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 login(getUserName(), getPassword());
             }
         });
-
-        //  File file= new File(Global.SHAREDPREFERENCE_URL);
     }
 
-   /* @Override
-    public void onBackPressed(){
-
-    }*/
     private void initHandler() {
         handler = new Handler() {
             @Override
@@ -103,15 +116,8 @@ public class LoginActivity extends Activity implements IMsgBack{
                         Setting.getInstance().setUserPhone(getUserName());
                         Setting.getInstance().setFragmentId(fromTab);
                         startActivity(intent);
-
-
-                    /*    Setting.getInstance().setUserName(getUserName());
-                        Setting.getInstance().setPassword(getPassword());
-                        Setting.getInstance().setUserMoney(msg.arg1);
-                        Setting.getInstance().setUserAchievement(msg.arg2);*/
                         break;
                     case LOGIN_WRONG_MSG:
-
                         Toast.makeText(LoginActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
 
                 }
@@ -122,20 +128,6 @@ public class LoginActivity extends Activity implements IMsgBack{
 
 
 
-   /* private void intentRegister() {
-        Intent intent = new Intent(this, Register.class);
-        intent.putExtra("fragment", 3);
-        startActivity(intent);
-    }*/
-
-    /*//登出，有些组件重新显示，有些消失
-    private void loginOut() {
-        loginRegisterLayout.setVisibility(View.VISIBLE);
-        loginSuccessName.setVisibility(View.GONE);
-        loginOut.setVisibility(View.GONE);
-        closeSoftkeyBoard(userNameEdit);
-        Setting.getInstance().logOutUser();
-    }*/
 
     private boolean closeSoftkeyBoard(EditText et) {
 

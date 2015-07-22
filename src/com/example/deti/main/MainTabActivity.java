@@ -21,6 +21,7 @@ import com.example.deti.user.IMsgBack;
 import com.example.deti.util.AppMessage;
 import com.example.deti.util.Global;
 import com.example.deti.util.SysApplication;
+import com.example.deti.util.Util;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -49,12 +50,13 @@ public class MainTabActivity extends FragmentActivity implements IMsgBack {
     private LinearLayout homeSex;
     private TextView womenText;
     private TextView manText;
-    private ImageView settingImage;
+
     private ImageView homeSetting;
     //侧滑布局
     private SlidingMenu slidingLayout;
     //点击事件
     private ImageView menuImage;
+
 
 
     //
@@ -81,6 +83,7 @@ public class MainTabActivity extends FragmentActivity implements IMsgBack {
         Setting.init(MainTabActivity.this);
         // JPushInterface.init(this);
         //  JPushInterface.setDebugMode(true);
+
         msgKey = DumpMessage.getInstance().RegistryCallback(this);
         SysApplication.getInstance().addActivity(this);
         dbManager = new DBManager(this);
@@ -139,6 +142,9 @@ public class MainTabActivity extends FragmentActivity implements IMsgBack {
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+        returnFragment= Setting.getInstance().getFragmentId();
+        Log.i(Tag, returnFragment + "");
+        mTabHost.setCurrentTab(returnFragment);
     }
 
     View.OnClickListener menuClick = new View.OnClickListener() {
@@ -164,8 +170,14 @@ public class MainTabActivity extends FragmentActivity implements IMsgBack {
         homeSex = (LinearLayout) findViewById(R.id.home_sex_choice);
         womenText = (TextView) findViewById(R.id.women);
         manText = (TextView) findViewById(R.id.man);
-        homeSetting = (ImageView) findViewById(R.id.home_setting);
+        homeSetting = (ImageView)findViewById(R.id.home_setting);
+        homeSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Util.startActivityAnim(MainTabActivity.this,MySettingActivity.class);
 
+            }
+        });
         homeSex.setVisibility(View.VISIBLE);
         homeTitle.setVisibility(View.GONE);
         womenText.setOnClickListener(new View.OnClickListener() {
@@ -356,15 +368,6 @@ public class MainTabActivity extends FragmentActivity implements IMsgBack {
         newsNumber.setText(String.valueOf(count));
     }
 
-    private View getSpecialTemView() {
-        View view = layoutInflater.inflate(R.layout.special, null);
-
-        ImageView imageView = (ImageView) view.findViewById(R.id.imageview);
-        newsNumber = (TextView) view.findViewById(R.id.newsNumber);
-        imageView.setImageResource(mImageViewArray[2]);
-        return view;
-
-    }
 
     /**
      * 给Tab按钮设置图标和文字

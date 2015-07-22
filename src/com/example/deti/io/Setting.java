@@ -18,6 +18,19 @@ public class Setting {
     private int  money ;
     private int achievement;
 
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("avatarUrl", avatarUrl);
+        editor.commit();
+        this.avatarUrl = avatarUrl;
+    }
+
+    private String avatarUrl;
+
     public String getAvatar() {
         return avatar;
     }
@@ -163,7 +176,8 @@ public class Setting {
         userPhone = sharedPreferences.getString("userphone", null);
         fragmentId = sharedPreferences.getInt("fragmentid", 0);
         isChangedAvatar = sharedPreferences.getBoolean("isChangedAvatar", false);
-        avatar = sharedPreferences.getString("avatar",null);
+        avatar = sharedPreferences.getString("avatar", null);
+        avatarUrl = sharedPreferences.getString("avatarUrl",null);
     }
 
     private Setting(Context context){
