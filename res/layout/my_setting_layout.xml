@@ -43,6 +43,7 @@
                 android:layout_height="50dp"/>
     </RelativeLayout>
     <RelativeLayout
+            android:id="@+id/my_address_layout"
             android:layout_width="fill_parent"
             android:layout_height="55dp"
             android:background="@color/white">

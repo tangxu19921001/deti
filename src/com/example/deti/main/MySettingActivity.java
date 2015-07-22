@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.deti.R;
 import com.example.deti.entity.Person;
 import com.example.deti.io.Setting;
+import com.example.deti.my.AddressManageActivity;
 import com.example.deti.my.SelectPicPopWindow;
 import com.example.deti.parse.JsonParse;
 import com.example.deti.user.IMsgBack;
@@ -57,6 +58,7 @@ public class MySettingActivity extends Activity implements IMsgBack {
     private String  picPath;
     StringBuffer resultBuffer = new StringBuffer();
     String resultString;
+    private RelativeLayout myAddressRel;
     @Override
     public void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
@@ -78,6 +80,13 @@ public class MySettingActivity extends Activity implements IMsgBack {
             }
         });
         RelativeLayout settingAvatarPop = (RelativeLayout)findViewById(R.id.avatar_re_layout);
+        myAddressRel = (RelativeLayout)findViewById(R.id.my_address_layout);
+        myAddressRel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Util.startActivityAnim(MySettingActivity.this,AddressManageActivity.class);
+            }
+        });
         settingAvatarPop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -291,12 +300,12 @@ public class MySettingActivity extends Activity implements IMsgBack {
             // 在开始用HttpURLConnection对象的setRequestProperty()设置,就是生成HTML文件头
             conn.setRequestProperty("ser-Agent", "Fiddler");
             // 设置contentType
-      //TODO      conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + NetUtil.BOUNDARY);
+           conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + NetUtil.BOUNDARY);
             OutputStream os = conn.getOutputStream();
             DataOutputStream ds = new DataOutputStream(os);
-          // TODO NetUtil.writeStringParams(textParams, ds);
-         // TODO  NetUtil.writeFileParams(fileparams, ds);
-            //NetUtil.paramsEnd(ds);
+          //TODO NetUtil.writeStringParams(textParams, ds);
+            NetUtil.writeFileParams(fileparams, ds);
+            NetUtil.paramsEnd(ds);
             // 对文件流操作完,要记得及时关闭
             os.close();
             // 服务器返回的响应吗
@@ -305,7 +314,7 @@ public class MySettingActivity extends Activity implements IMsgBack {
             if (code == 200) {// 返回的响应码200,是成功
                 // 得到网络返回的输入流
                 InputStream is = conn.getInputStream();
-            // TODO   resultString = NetUtil.readString(is);
+              resultString = NetUtil.readString(is);
                 return true;
             } else {
 

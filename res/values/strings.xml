@@ -40,6 +40,7 @@
     <string name="register_success">注册成功</string>
     <string name="my_setting">我的设置</string>
     <string name="avatar_setting_text">头像</string>
+
 <!-- 我的设置页面-->
     <string name="my_address">我的地址</string>
     <string name="my_size">我的尺码</string>
@@ -47,6 +48,13 @@
     <string name="about_deti">关于得体</string>
     <string name="login_out">退出登录</string>
     <string name="keep_success">保存成功</string>
+    <string name="address_manage">地址管理</string>
+    <string name="get_goods_person">收件人:</string>
+    <string name="select_province_city_county">选择省份/市/县 - 点击</string>
+    <string name="phone">手机:</string>
+    <string name="post_code">邮编:</string>
+    <string name="street_address">街道地址</string>
+    <string name="keep_address">保存地址</string>
     <!--以前程序的注释-->
     <string name="app_name">得体</string>
     <string name="user_name">账户名:</string>

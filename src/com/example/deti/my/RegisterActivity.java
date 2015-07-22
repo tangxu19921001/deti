@@ -14,6 +14,7 @@ import com.example.deti.R;
 import com.example.deti.entity.Person;
 import com.example.deti.main.DumpMessage;
 import com.example.deti.main.LoginActivity;
+
 import com.example.deti.myTask.TaskDetailActivity;
 import com.example.deti.parse.JsonParse;
 import com.example.deti.user.IMsgBack;
@@ -133,7 +134,7 @@ public class RegisterActivity extends Activity implements IMsgBack {
         if (isPasswordMotify(setPasswordEdit.getText().toString())) {
             //????Map?????????????????
             //密码需要加密32位小写传输
-            String Md5Password = TaskDetailActivity.getMd5Value( setPasswordEdit.getText().toString());
+            String Md5Password = TaskDetailActivity.getMd5Value(setPasswordEdit.getText().toString());
             HashMap<String, String> paramHashMap = new HashMap<String, String>();
             paramHashMap.put("cellphone", getPhone());
             paramHashMap.put("area","+86");
