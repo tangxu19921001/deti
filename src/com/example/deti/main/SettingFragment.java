@@ -41,7 +41,7 @@ public class SettingFragment extends Fragment implements IMsgBack {
     private HashMap<String, String> hashMap;
     private Context context;
     private Handler handler;
-    private LinearLayout  styleLikeLayout;
+    private LinearLayout styleLikeLayout;
     private LinearLayout designerLikeLayout;
 
     @Override
@@ -65,23 +65,29 @@ public class SettingFragment extends Fragment implements IMsgBack {
     @Override
     public void onResume() {
         super.onResume();
-       if (Setting.getInstance().getUserPhone()!=null&&!Setting.getInstance().getUserPhone().equals("")){
-           if (hashMap == null) {
-               hashMap = new HashMap<String, String>();
-           }
-           hashMap.put("cellphone", Setting.getInstance().getUserPhone());
-           //TODO测试
+        if (Setting.getInstance().getUserPhone() != null && !Setting.getInstance().getUserPhone().equals("")) {
+            if (hashMap == null) {
+                hashMap = new HashMap<String, String>();
+            }
+            hashMap.put("cellphone", Setting.getInstance().getUserPhone());
+            //TODO测试
 //           if (Setting.getInstance().isChangedAvatar()||Setting.getInstance().getAvatar()==null){
+            if (Setting.getInstance().getAvatar() == null) {
+                taskThread.addTask(new HttpTask(Global.GET_USER_IMFORMATION, Global.MSG_GET_USER_IMFORMATION, context, hashMap));
+            } else {
+                Message successMsg = handler.obtainMessage();
+                successMsg.what = Global.MSG_GET_USER_IMFORMATION;
+                successMsg.obj = Setting.getInstance().getAvatar();
+                handler.sendMessage(successMsg);
+            }
 
-               taskThread.addTask(new HttpTask(Global.GET_USER_IMFORMATION, Global.MSG_GET_USER_IMFORMATION, context, hashMap));
 //           }else {
 //               Message successMsg = handler.obtainMessage();
 //               successMsg.what = Global.MSG_GET_USER_IMFORMATION;
 //               successMsg.obj = Setting.getInstance().getAvatar();
 //               handler.sendMessage(successMsg);
 //           }
-       }
-
+        }
 
 
     }
@@ -92,7 +98,7 @@ public class SettingFragment extends Fragment implements IMsgBack {
         if (msgKey != null) {
             DumpMessage.getInstance().UnRegistryCallback(msgKey);
         }
-        if (taskThread!=null){
+        if (taskThread != null) {
             taskThread.threadDestroy();
         }
     }
@@ -100,24 +106,26 @@ public class SettingFragment extends Fragment implements IMsgBack {
     private void init(View inflateView) {
 
         avatar = (CircleImageView) inflateView.findViewById(R.id.avatar);
-        styleLikeLayout = (LinearLayout)inflateView.findViewById(R.id.style_like_layout);
+        styleLikeLayout = (LinearLayout) inflateView.findViewById(R.id.style_like_layout);
         styleLikeLayout.setOnClickListener(menuClick);
-        designerLikeLayout = (LinearLayout)inflateView.findViewById(R.id.designer_like_layout);
+        designerLikeLayout = (LinearLayout) inflateView.findViewById(R.id.designer_like_layout);
         designerLikeLayout.setOnClickListener(designerClick);
     }
+
     View.OnClickListener menuClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-           Util.startActivityAnim(getActivity(),CollectionActivity.class);
+            Util.startActivityAnim(getActivity(), CollectionActivity.class);
         }
     };
 
     View.OnClickListener designerClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Util.startActivityAnim(getActivity(),DesignerLikeActivity.class);
+            Util.startActivityAnim(getActivity(), DesignerLikeActivity.class);
         }
     };
+
     private void initHandler() {
         handler = new Handler() {
             @Override
@@ -169,7 +177,7 @@ public class SettingFragment extends Fragment implements IMsgBack {
             if (person1.getResult() == true) {
                 Setting.getInstance().setAvatar(Global.SERVICE_URL + person1.getAvatar());
                 successMsg.what = Global.MSG_GET_USER_IMFORMATION;
-                successMsg.obj =Global.SERVICE_URL+ person1.getAvatar();
+                successMsg.obj = Global.SERVICE_URL + person1.getAvatar();
                 handler.sendMessage(successMsg);
             } else {
                 successMsg.what = Global.MSG_REQUEST_WRONG;

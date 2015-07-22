@@ -49,7 +49,7 @@ public class NetUtil {
 			ds.writeBytes("--" + BOUNDARY + "\r\n");
 			ds.writeBytes("Content-Disposition: form-data; name=\"" + name + "\"; filename=\""
 					+ URLEncoder.encode(value.getName(), "UTF-8") + "\"\r\n");
-			ds.writeBytes("Content-Type:image/png \r\n");
+			ds.writeBytes("Content-Type:image/jpeg\r\n");
 			ds.writeBytes("\r\n");
 			ds.write(getBytes(value));
 			ds.writeBytes("\r\n");

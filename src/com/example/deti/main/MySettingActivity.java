@@ -2,6 +2,7 @@ package com.example.deti.main;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -58,6 +59,7 @@ public class MySettingActivity extends Activity implements IMsgBack {
     private String  picPath;
     StringBuffer resultBuffer = new StringBuffer();
     String resultString;
+    File localPicFile;
     private RelativeLayout myAddressRel;
     @Override
     public void onCreate(Bundle savedInstance){
@@ -195,7 +197,6 @@ public class MySettingActivity extends Activity implements IMsgBack {
                 startPhotoZoom(Uri.fromFile(imageFile));
                 break;
             case PHOTO_REQUEST_CUT:
-                if (data != null) {
                     //设置显示在图像中
                     //  sentPicToNext(getPathFromUri(data));
                     if (imageFile != null && imageFile.exists()) {
@@ -203,47 +204,32 @@ public class MySettingActivity extends Activity implements IMsgBack {
                         option.inSampleSize = 2;
                         SavedBitmap = BitmapFactory.decodeFile(imageFile.getPath(), option);
                         circleImageView.setImageBitmap(SavedBitmap);
-                        if (taskThread==null){
-                            taskThread = new TaskThread();
-                        }
-                        HashMap<String,String>hashMap = new HashMap<>();
-                        hashMap.put("cellphone", Setting.getInstance().getUserPhone());
-                        Map<String,Object>map = new HashMap<String,Object>();
-                        map.put("file", imageFile);
                         Thread  myRun = new Thread(new MyRun());
                         myRun.start();
-
-                        //TODO taskThread.addTask(new HttpTask(Global.AVATAR_POST_URL+"?cellphone="+Setting.getInstance().getUserPhone(), Global.MSG_ADD_AVATAR_USER, MySettingActivity.this, map));
                     }
-
-                }else{
-                    if (imageFile != null && imageFile.exists()) {
-                        BitmapFactory.Options option = new BitmapFactory.Options();
-                        option.inSampleSize = 2;
-                        SavedBitmap = BitmapFactory.decodeFile(imageFile.getPath(), option);
-                        circleImageView.setImageBitmap(SavedBitmap);
-                        HashMap<String,String>hashMap = new HashMap<>();
-                        hashMap.put("cellphone", Setting.getInstance().getUserPhone());
-                   //  TODO   taskThread.addTask(new HttpTask(Global.AVATAR_POST_URL, Global.MSG_ADD_AVATAR_USER, MySettingActivity.this, hashMap, imageFile));
-                    }
-                }
                 break;
-
             case PHOTO_SELECT:
+                if (data==null){
+                    return;
+                }
                 if (resultCode == RESULT_OK) {
                         Uri uri = data.getData();
                         ContentResolver cr = this.getContentResolver();
                         try {
                           Bitmap  bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
                             circleImageView.setImageBitmap(bitmap);
+                            saveBitmap2file(bitmap);
                         } catch (FileNotFoundException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
-                    File localPicFile =getFileFromUri(data);
-                    HashMap<String,String>hashMap = new HashMap<>();
-                    hashMap.put("cellphone", Setting.getInstance().getUserPhone());
-         //TODO           taskThread.addTask(new HttpTask(Global.AVATAR_POST_URL, Global.MSG_ADD_AVATAR_USER, MySettingActivity.this, hashMap, localPicFile));
+
+                    localPicFile = new File(saveDir + "tempPic.jpg");
+                    if(localPicFile ==null){
+                        return;
+                    }
+                    Thread  myPicRun = new Thread(new MyPicRun());
+                    myPicRun.start();
                     }
         }
     }
@@ -263,7 +249,7 @@ public class MySettingActivity extends Activity implements IMsgBack {
                if (person1!=null){
                    if (person1.getResult() == true) {
                        Setting.getInstance().setAvatar(Global.SERVICE_URL + person1.getPath());
-                       Setting.getInstance().setIsChangedAvatar(true);
+                   //    Setting.getInstance().setIsChangedAvatar(true);
                        //TODO
                        successMsg.what = Global.MSG_ADD_AVATAR_USER;
                        handler.sendMessage(successMsg);
@@ -277,6 +263,35 @@ public class MySettingActivity extends Activity implements IMsgBack {
         }
     }
 
+    public class MyPicRun implements Runnable {
+        @Override
+        public void run() {
+            if (uploadFile(localPicFile,Global.AVATAR_POST_URL+"?cellphone="+Setting.getInstance().getUserPhone())){
+                JsonParse jsonParse = new JsonParse();
+                Person person1 = null;
+                Message successMsg = handler.obtainMessage();
+                try{
+                    person1 = jsonParse.getPerson(resultString, Person.class);
+                }catch (Exception e){
+                    Util.showToast(R.string.accept,MySettingActivity.this);
+
+                }
+                if (person1!=null){
+                    if (person1.getResult() == true) {
+                        Setting.getInstance().setAvatar(Global.SERVICE_URL + person1.getPath());
+                     //   Setting.getInstance().setIsChangedAvatar(true);
+                        //TODO
+                        successMsg.what = Global.MSG_ADD_AVATAR_USER;
+                        handler.sendMessage(successMsg);
+                        Message message = handler.obtainMessage();
+                        message.what = Global.MSG_ADD_AVATAR_USER;
+                        handler.sendMessage(message);
+                    }
+                }
+            }
+
+        }
+    }
     public  boolean uploadFile(File file, String RequestURL) {
         try {
             // 创建一个URL对象
@@ -346,27 +361,59 @@ public class MySettingActivity extends Activity implements IMsgBack {
             SavedBitmap = null;
         }
     }
+private  boolean saveBitmap2file(Bitmap bmp){
+    Bitmap.CompressFormat format= Bitmap.CompressFormat.JPEG;
+    int quality = 100;
+    OutputStream stream = null;
+    try {
+        stream = new FileOutputStream(saveDir + "tempPic.jpg");
+    } catch (FileNotFoundException e) {
+// TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+
+    return bmp.compress(format, quality, stream);
+}
+    public static String getPath(Uri uri, Context context) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        ContentResolver cr = context.getContentResolver();
+        Cursor cursor = null;
+        try{   cursor = cr.query(uri, proj, null, null, null);
+
+    cursor.moveToFirst();
+}catch (Exception e){
+
+}
+
+
+        int actual_image_column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        return cursor.getString(actual_image_column_index);
+
+    }
     private File getFileFromUri(Intent data){
+
         Uri uri = data.getData();
-
-        String[] pojo = { MediaStore.MediaColumns.DATA };
-        File file;
-
-        Cursor cursor = MySettingActivity.this.getContentResolver().query(uri, pojo, null, null, null);
-        if(cursor!=null){
-            int columnIndex = cursor.getColumnIndexOrThrow(pojo[0]);
-            cursor.moveToFirst();
-             picPath = cursor.getString(columnIndex);
-        }
-        if (Integer.parseInt(Build.VERSION.SDK) < 14) {
-            cursor.close();
-        }
+        picPath= getPath(uri,MySettingActivity.this);
+//
+//        String[] pojo = { MediaStore.MediaColumns.DATA };
+//        File file;
+//
+//        Cursor cursor = MySettingActivity.this.getContentResolver().query(uri, pojo, null, null, null);
+//        if(cursor!=null){
+//            int columnIndex = cursor.getColumnIndexOrThrow(pojo[0]);
+//            cursor.moveToFirst();
+//             picPath = cursor.getString(columnIndex);
+//        }
+//        if (Integer.parseInt(Build.VERSION.SDK) < 14) {
+//            cursor.close();
+//        }
         if (picPath!=null&&(picPath.endsWith(".png") ||
                 picPath.endsWith(".PNG") ||
         picPath.endsWith(".jpg") ||
         picPath.endsWith(".JPG"))){
 
-           file =new File(picPath);
+        File   file =new File(picPath);
             return file;
         }
         return null;
@@ -395,7 +442,7 @@ public class MySettingActivity extends Activity implements IMsgBack {
                 Person person1 = jsonParse.getPerson(appMessage.getMsg(), Person.class);
                 if (person1.getResult() == true) {
                     Setting.getInstance().setAvatar(Global.SERVICE_URL + person1.getPath());
-                    Setting.getInstance().setIsChangedAvatar(true);
+                //    Setting.getInstance().setIsChangedAvatar(true);
                     //TODO
                     successMsg.what = Global.MSG_ADD_AVATAR_USER;
 

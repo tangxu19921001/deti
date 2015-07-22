@@ -21,7 +21,7 @@ public class AddressManageActivity extends Activity   {
         setContentView(R.layout.my_setting_layout);
 
         initView();
-        initHandler();
+        //initHandler();
     }
     private void initView(){
 
